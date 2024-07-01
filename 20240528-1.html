@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>電影票價系統</title>
+    <script>
+        function getTicketPrice(age) {
+            if (age >= 2 && age < 12) {
+                return 200;
+            } else if (age >= 12 && age < 65) {
+                return 300;
+            } else if (age >= 65) {
+                return 150;
+            } else {
+                return 0; // 未滿2歲免費
+            }
+        }
+
+        function calculatePrice() {
+            const age1 = parseInt(document.getElementById('age1').value);
+            const numberOfTickets1 = parseInt(document.getElementById('numberOfTickets1').value);
+            const age2 = parseInt(document.getElementById('age2').value);
+            const numberOfTickets2 = parseInt(document.getElementById('numberOfTickets2').value);
+            const age3 = parseInt(document.getElementById('age3').value);
+            const numberOfTickets3 = parseInt(document.getElementById('numberOfTickets3').value);
+
+            let totalPrice = 0;
+
+            const ages = [age1, age2, age3];
+            const tickets = [numberOfTickets1, numberOfTickets2, numberOfTickets3];
+
+            for (let i = 0; i < ages.length; i++) {
+                if (isNaN(ages[i]) || ages[i] < 0) {
+                    alert(`請輸入有效的年齡在第 ${i + 1} 組。`);
+                    return;
+                }
+
+                if (isNaN(tickets[i]) || tickets[i] <= 0) {
+                    alert(`請輸入有效的票數在第 ${i + 1} 組。`);
+                    return;
+                }
+
+                const ticketPrice = getTicketPrice(ages[i]);
+                totalPrice += ticketPrice * tickets[i];
+            }
+
+            document.getElementById('totalPrice').innerText = totalPrice;
+        }
+    </script>
+</head>
+<body>
+    <h1>電影票價系統</h1>
+    <div>
+        <h2>票價說明</h2>
+        <p>一、滿 2 歲到 12 歲以下為兒童票，票價 200 元。</p>
+        <p>二、滿 12 歲以上到 65 歲以下為全票，票價 300 元。</p>
+        <p>三、滿 65 歲以上為愛心敬老票，票價 150 元。</p>
+    </div>
+    <div>
+        <label for="age1">年齡1:</label>
+        <input type="number" id="age1" name="age1">
+        <label for="numberOfTickets1">票數1:</label>
+        <input type="number" id="numberOfTickets1" name="numberOfTickets1"><br><br>
+    </div>
+    <div>
+        <label for="age2">年齡2:</label>
+        <input type="number" id="age2" name="age2">
+        <label for="numberOfTickets2">票數2:</label>
+        <input type="number" id="numberOfTickets2" name="numberOfTickets2"><br><br>
+    </div>
+    <div>
+        <label for="age3">年齡3:</label>
+        <input type="number" id="age3" name="age3">
+        <label for="numberOfTickets3">票數3:</label>
+        <input type="number" id="numberOfTickets3" name="numberOfTickets3"><br><br>
+    </div>
+    <button onclick="calculatePrice()">計算票價</button>
+    <p>總金額: <span id="totalPrice"></span> 元</p>
+</body>
+    <script src="./20240528-2.js"></script>
+    <script src="./20240528-3.js"></script>
+    <script src="./20240528-4.js"></script>
+</html>
